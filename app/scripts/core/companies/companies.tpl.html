@@ -1,0 +1,67 @@
+<ul ng-controller="myApp.Companies.companiesCtrl">
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search Name" ng-model="searchName">
+      </div>
+    </div>
+  </form>
+
+  <li class="new-company" ng-class="{'edit': editCompanyId === 'newCompany'}">
+    <div ng-include="'scripts/core/companies/edit-company-form.tpl.html'" ng-if="editCompanyId === 'newCompany'"></div>
+    <div class="add-user">
+      <a add-class ng-click="openCompanyForm('newCompany')" ng-hide="editUserId === 'newCompany'"><i
+        class="fa fa-plus fa-2x"></i></a>
+    </div>
+  </li>
+
+  <li class="title">
+
+    <div class="col-lg-2">
+      <a ng-click="order('companyName')">Company Name</a>
+      <span class="sort-order" ng-show="orderCompanies.predicate === 'companyName'"
+            ng-class="{reverse: orderCompanies.reverse}"></span>
+    </div>
+
+    <div class="col-lg-2">
+      <a ng-click="order('addressCompany')">Address Company</a>
+      <span class="sort-order" ng-show="orderCompanies.predicate === 'addressCompany'"
+            ng-class="{reverse: orderCompanies.reverse}"></span>
+    </div>
+
+    <div class="col-lg-2">Company Email</div>
+    <div class="col-lg-2">Year Foundation</div>
+    <div class="col-lg-2">Workers</div>
+
+  </li>
+
+  <li class="company-content" ng-class="{'edit': editCompanyId === company.id}"
+      ng-repeat="company in companies | orderBy: orderCompanies.predicate: orderCompanies.reverse | filter: searchName">
+
+    <div ng-include="'scripts/core/companies/edit-company-form.tpl.html'" ng-if="editCompanyId === company.id"></div>
+    <div class="row" ng-hide="editCompanyId === company.id">
+      <div class="col-lg-2">
+        {{ company.companyName }}
+      </div>
+      <div class="col-lg-2">
+        {{ company.addressCompany }}
+      </div>
+      <div class="col-lg-2">
+        {{ company.companyMail }}
+      </div>
+      <div class="col-lg-2">
+        {{ company.yearFoundation }}
+      </div>
+      <div class="col-lg-2">
+        {{ company.workers }}
+      </div>
+
+      <div class="col-lg-2 buttons">
+        <a class="edit-button" ng-click="openCompanyForm(company.id)" add-class><i
+          class=" fa fa-pencil-square-o fa-2x"></i></a>
+        <a ng-click="deleteCompany(company)"><i class="fa fa-trash-o fa-2x"></i></a>
+      </div>
+    </div>
+  </li>
+</ul>

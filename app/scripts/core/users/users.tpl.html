@@ -1,4 +1,4 @@
-<ul>
+<ul ng-controller="myApp.Users.usersCtrl">
     <form>
         <div class="form-group">
             <div class="input-group">
@@ -18,13 +18,13 @@
     <li class="title">
 
         <div class="col-lg-2">
-            <a href="#" ng-click="order('firstName')">First Name</a>
+            <a ng-click="order('firstName')">First Name</a>
             <span class="sort-order" ng-show="orderUsers.predicate === 'firstName'" ng-class="{reverse: orderUsers.reverse}"></span>
         </div>
 
         <div class="col-lg-2">Last Name</div>
         <div class="col-lg-2">
-            <a href="#" ng-click="order('birthDay')">Birth Day</a>
+            <a ng-click="order('birthDay')">Birth Day</a>
             <span class="sort-order" ng-show="orderUsers.predicate === 'birthDay'" ng-class="{reverse: orderUsers.reverse}"></span>
         </div>
 
