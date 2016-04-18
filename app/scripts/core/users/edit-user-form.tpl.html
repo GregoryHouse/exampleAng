@@ -1,28 +1,52 @@
 <div ng-controller="myApp.Users.editUsersCtrl">
-    <form name="forma">
-        <div class="form-group col-lg-2">
-            <span >First Name</span>
-            <input data-input-name="input-user-name" name="firstName" size="20" placeholder="First Name" ng-model="editUser.firstName">
-        </div>
-        <div class="form-group col-lg-2">
-            <span>Last Name</span>
-            <input name="lastName" data-input-surname="input-user-surname" size="20" placeholder="Last Name" ng-model="editUser.lastName">
-        </div>
-        <div class="form-group col-lg-2">
-            <span>Birth Day</span>
-            <input data-input-mail="input-user-b-day" name="b-day" size="20" placeholder="Birth Day" ng-model="editUser.birthDay">
-        </div>
-        <div class="form-group col-lg-2">
-            <span>Type</span>
-            <input data-input-mail="input-user-type" name="type" size="20" placeholder="Type" ng-model="editUser.type">
-        </div>
-        <div class="form-group col-lg-2">
-            <span>Mail</span>
-            <input data-input-mail="input-user-mail" type="email" name="mail" size="20" placeholder="Mail" ng-model="editUser.mail">
-        </div>
-        <div class="form-group col-lg-3 buttons">
-            <a type="button" class="button-close"  ng-click="saveUser(editUser)"><i class="fa fa-floppy-o fa-2x"></i></a>
-            <a type="button" class="button-close" ng-click="openUserForm()"><i class="fa fa-times fa-2x"></i></a>
-        </div>
-    </form>
+  <form name="forma" novalidate>
+    <div class="form-group col-lg-2">
+      <span>First Name</span>
+      <input name="firstName" size="20" placeholder="First Name"
+             ng-model="editUser.firstName" required minlength="3" ng-maxlength="10" class="first-name"
+             ng-class="{ 'has-error': forma.firstName.$touched && forma.firstName.$invalid }">
+
+      <span ng-messages="forma.firstName.$error" class="form-group" ng-if="forma.firstName.$touched || inValid()">
+        <span ng-messages-include="scripts/core/users/error-massage.html"></span>
+      </span>
+
+    </div>
+
+    <div class="form-group col-lg-2">
+      <span>Last Name</span>
+      <input name="lastName" size="20" placeholder="Last Name"
+             ng-model="editUser.lastName">
+    </div>
+
+    <div class="form-group col-lg-2">
+      <span>Birth Day</span>
+      <input name="b-day" size="20" placeholder="Birth Day"
+             ng-model="editUser.birthDay">
+    </div>
+
+    <div class="form-group col-lg-2">
+      <span>Type</span>
+      <input name="type" size="20" placeholder="Type" ng-model="editUser.type">
+    </div>
+
+    <div class="form-group col-lg-2">
+      <span>Mail</span>
+      <input type="email" name="mail" size="20" placeholder="Mail" ng-model="editUser.mail"
+             required class="user-email"
+             ng-class="{ 'has-error': forma.mail.$touched && forma.mail.$invalid }">
+
+      <span ng-messages="forma.mail.$error" class="form-group" ng-if="forma.mail.$touched || inValid()">
+         <span ng-messages-include="scripts/core/users/user-email-errors.html"></span>
+      </span>
+
+    </div>
+
+    <div class="form-group col-lg-3 buttons">
+      <input type="submit" value="" class="button-save" ng-click="saveUser(editUser,forma.$valid)"
+             ng-disabled="forma.firstName.$dirty && forma.firstName.$invalid ">
+
+      <input ui-sref="users" type="button" class="button-close" ng-click="openUserForm()">
+    </div>
+
+  </form>
 </div>

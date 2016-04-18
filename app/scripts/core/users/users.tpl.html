@@ -9,9 +9,9 @@
     </form>
 
     <li class="new-user" ng-class="{'edit': editUserId === 'newUser'}">
-        <div ng-include="'scripts/core/users/edit-user-form.tpl.html'" ng-if="editUserId === 'newUser'"></div>
+        <div ui-view ng-if="editUserId === 'newUser'"></div>
         <div class="add-user">
-            <a add-class ng-click="openUserForm('newUser')" ng-hide="editUserId === 'newUser'"><i class="fa fa-plus fa-2x"></i></a>
+            <a ui-sref=".newUser" ng-click="openUserForm('newUser')" ng-hide="editUserId === 'newUser'"><i class="fa fa-plus fa-2x"></i></a>
         </div>
     </li>
 
@@ -36,7 +36,7 @@
     <li class="user-content" ng-class="{'edit': editUserId === user.id}"
         ng-repeat="user in users | orderBy: orderUsers.predicate: orderUsers.reverse | filter: searchName">
 
-        <div ng-include="'scripts/core/users/edit-user-form.tpl.html'" ng-if="editUserId === user.id"></div>
+        <div ui-view ng-if="editUserId === user.id"></div>
         <div class="row" ng-hide="editUserId === user.id">
             <div class="col-lg-2">
                 {{ user.firstName }}
@@ -54,7 +54,7 @@
                 {{ user.mail }}
             </div>
             <div class="col-lg-2 buttons">
-                <a class="edit-button" ng-click="openUserForm(user.id)" add-class><i
+                <a ui-sref=".edit" class="edit-button" ng-click="openUserForm(user.id)" add-class><i
                         class=" fa fa-pencil-square-o fa-2x"></i></a>
                 <a ng-click="deleteUser(user)"><i class="fa fa-trash-o fa-2x"></i></a>
             </div>

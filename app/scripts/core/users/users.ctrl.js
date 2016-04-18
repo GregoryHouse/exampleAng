@@ -3,8 +3,7 @@
   angular.module('myApp.Users').controller("myApp.Users.usersCtrl", function ($scope, usersSrv) {
 
     $scope.editUserId = '';
-    $scope.usersSrv = usersSrv;
-    $scope.users = $scope.usersSrv.getAllUsers();
+    $scope.users = usersSrv.getAllUsers();
 
     $scope.orderUsers = {
       predicate: 'firstName',
@@ -17,6 +16,7 @@
     };
 
     $scope.openUserForm = function (userId) {
+
       if (!userId) {
         $scope.editUserId = '';
       } else if (userId === 'newUser') {
@@ -27,9 +27,9 @@
     };
 
     $scope.deleteUser = function (editUser) {
-      $scope.usersSrv.deleteUser(editUser);
+      usersSrv.deleteUser(editUser);
     };
-  });
+  })
 
 }());
 

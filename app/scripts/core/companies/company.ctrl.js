@@ -3,7 +3,6 @@
   angular.module('myApp.Companies').controller("myApp.Companies.companiesCtrl", function ($scope, companiesSrv) {
 
     $scope.editCompanyId = '';
-    $scope.companiesSrv = companiesSrv;
     $scope.companies = $scope.companiesSrv.getAllCompanies();
 
     $scope.orderCompanies = {
@@ -28,7 +27,7 @@
     };
 
     $scope.deleteCompany = function (editCompany) {
-      $scope.companiesSrv.deleteCompany(editCompany);
+      companiesSrv.deleteCompany(editCompany);
     };
   });
 

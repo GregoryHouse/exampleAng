@@ -1,48 +1,41 @@
 "use strict";
 (function () {
-  angular.module("myApp", ["myApp.Users","myApp.Companies", "ngRoute"])
+  angular.module("myApp", ["myApp.Users","myApp.Companies", "ui.router",'ngMessages'])
 
-    .config(function ($routeProvider) {
-    $routeProvider
-      .when('/users', {
-          templateUrl: 'scripts/core/users/users.tpl.html',
-          controller: 'myApp.Users.usersCtrl'
-      })
+  .config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    function ($stateProvider) {
 
-      .when('/companies', {
-        templateUrl: 'scripts/core/companies/companies.tpl.html',
-        controller: 'myApp.Companies.companiesCtrl'
-      })
+      $stateProvider
+        .state('users', {
+          url: "/users",
+          templateUrl: "scripts/core/users/users.tpl.html"
+        })
+          .state('users.edit', {
+            url: "/editUser",
+            templateUrl: "scripts/core/users/edit-user-form.tpl.html"
+          })
 
+        .state('users.newUser', {
+          url: "/newUser",
+          templateUrl: "scripts/core/users/edit-user-form.tpl.html"
+        })
 
-  });
+        .state('companies', {
+          url: "/companies",
+          templateUrl: 'scripts/core/companies/companies.tpl.html'
+        })
+          .state('companies.edit', {
+            url: "/editCompany",
+            templateUrl: "scripts/core/companies/edit-company-form.tpl.html"
+          })
 
+          .state('companies.newCompany', {
+            url: "/newCompany",
+            templateUrl: "scripts/core/companies/edit-company-form.tpl.html"
+          })
 
-  //.config([
-  //  '$stateProvider',
-  //  '$urlRouterProvider',
-  //  function ($stateProvider, $urlRouterProvider) {
-  //
-  //    $stateProvider
-  //      .state('users', {
-  //        url: "/users",
-  //        templateUrl: "scripts/core/users/users.tpl.html"
-  //      })
-  //      .state('companies', {
-  //        url: "/companies",
-  //        templateUrl: 'scripts/core/'
-  //      })
-  //
-  //      .state('users/edituser', {
-  //        url: "#/users/edituser",
-  //        views: {
-  //          '': { templateUrl: "scripts/core/users/users.tpl.html" },
-  //          "lol": { templateUrl: "scripts/core/users/edit-user-form.tpl.html" },
-  //
-  //        }
-  //      })
-  //
-  //
-  //  }]);
+    }]);
 
 })();
