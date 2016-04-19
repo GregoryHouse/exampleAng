@@ -1,9 +1,9 @@
 "use strict";
 (function () {
-  angular.module('myApp.Companies').controller("myApp.Companies.companiesCtrl", function ($scope, companiesSrv) {
+  angular.module('myApp.Companies').controller("myApp.Companies.companiesCtrl", function ($scope, CompaniesSrv) {
 
     $scope.editCompanyId = '';
-    $scope.companies = $scope.companiesSrv.getAllCompanies();
+    $scope.companies = CompaniesSrv.getAllCompanies();
 
     $scope.orderCompanies = {
       predicate: 'companyName',
@@ -27,7 +27,7 @@
     };
 
     $scope.deleteCompany = function (editCompany) {
-      companiesSrv.deleteCompany(editCompany);
+      CompaniesSrv.deleteCompany(editCompany);
     };
   });
 

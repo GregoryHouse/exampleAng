@@ -9,9 +9,9 @@
   </form>
 
   <li class="new-company" ng-class="{'edit': editCompanyId === 'newCompany'}">
-    <div ui-view ng-if="editCompanyId === 'newCompany'"></div>
+    <div ng-include="'scripts/core/companies/edit-company-form.tpl.html'" ng-if="editCompanyId === 'newCompany'"></div>
     <div class="add-company">
-      <a ui-sref=".newCompany" ng-click="openCompanyForm('newCompany')" ng-hide="editCompanyId === 'newCompany'"><i class="fa fa-plus fa-2x"></i></a>
+      <a ng-click="openCompanyForm('newCompany')" ng-hide="editCompanyId === 'newCompany'"><i class="fa fa-plus fa-2x"></i></a>
     </div>
   </li>
 
@@ -38,7 +38,7 @@
   <li class="company-content" ng-class="{'edit': editCompanyId === company.id}"
       ng-repeat="company in companies | orderBy: orderCompanies.predicate: orderCompanies.reverse | filter: searchName">
 
-    <div ui-view ng-if="editCompanyId === company.id"></div>
+    <div ng-include="'scripts/core/companies/edit-company-form.tpl.html'" ng-if="editCompanyId === company.id"></div>
     <div class="row" ng-hide="editCompanyId === company.id">
       <div class="col-lg-2">
         {{ company.companyName }}
@@ -57,9 +57,11 @@
       </div>
 
       <div class="col-lg-2 buttons">
-        <a ui-sref=".edit" class="edit-button" ng-click="openCompanyForm(company.id)" add-class><i
-          class=" fa fa-pencil-square-o fa-2x"></i></a>
+
+        <a class="edit-button" ng-click="openCompanyForm(company.id)">
+          <i class=" fa fa-pencil-square-o fa-2x"></i></a>
         <a ng-click="deleteCompany(company)"><i class="fa fa-trash-o fa-2x"></i></a>
+
       </div>
     </div>
   </li>

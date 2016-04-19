@@ -1,51 +1,70 @@
 <div ng-controller="myApp.Users.editUsersCtrl">
-  <form name="forma" novalidate>
-    <div class="form-group col-lg-2">
-      <span>First Name</span>
+  <form name="editUserForm">
+
+    <div class="form-group col-lg-2" ng-class="{'has-error': isShowErrors(editUserForm, 'firstName')}">
+
+      <span ng-hide="isShowErrors(editUserForm, 'firstName')">First Name</span>
+
+      <div class="span-error" ng-messages="editUserForm.firstName.$error" ng-show="isShowErrors(editUserForm, 'firstName')">
+        <span ng-message="required">First Name is required</span>
+        <span ng-message="minlength">First Name is too short</span>
+        <span ng-message="maxlength">First Name is too long</span>
+      </div>
+
       <input name="firstName" size="20" placeholder="First Name"
-             ng-model="editUser.firstName" required minlength="3" ng-maxlength="10" class="first-name"
-             ng-class="{ 'has-error': forma.firstName.$touched && forma.firstName.$invalid }">
-
-      <span ng-messages="forma.firstName.$error" class="form-group" ng-if="forma.firstName.$touched || inValid()">
-        <span ng-messages-include="scripts/core/users/error-massage.html"></span>
-      </span>
-
+             ng-model="editUser.firstName" ng-required="true" ng-minlength="3" ng-maxlength="10" class="first-name">
     </div>
 
-    <div class="form-group col-lg-2">
-      <span>Last Name</span>
+    <div class="form-group col-lg-2" ng-class="{'has-error': isShowErrors(editUserForm, 'lastName')}">
+
+      <span ng-hide="isShowErrors(editUserForm, 'lastName')">Last Name</span>
+
+      <div class="span-error" ng-messages="editUserForm.lastName.$error" ng-show="isShowErrors(editUserForm, 'lastName')">
+        <span ng-message="maxlength">Last Name is too long</span>
+      </div>
+
       <input name="lastName" size="20" placeholder="Last Name"
-             ng-model="editUser.lastName">
+             ng-model="editUser.lastName" ng-maxlength="10">
     </div>
 
     <div class="form-group col-lg-2">
+
       <span>Birth Day</span>
-      <input name="b-day" size="20" placeholder="Birth Day"
-             ng-model="editUser.birthDay">
+
+      <input type="text" ng-model="editUser.birthDay" placeholder="Birth Day" class="data-picker">
+
     </div>
 
     <div class="form-group col-lg-2">
+
       <span>Type</span>
-      <input name="type" size="20" placeholder="Type" ng-model="editUser.type">
-    </div>
 
-    <div class="form-group col-lg-2">
-      <span>Mail</span>
-      <input type="email" name="mail" size="20" placeholder="Mail" ng-model="editUser.mail"
-             required class="user-email"
-             ng-class="{ 'has-error': forma.mail.$touched && forma.mail.$invalid }">
-
-      <span ng-messages="forma.mail.$error" class="form-group" ng-if="forma.mail.$touched || inValid()">
-         <span ng-messages-include="scripts/core/users/user-email-errors.html"></span>
-      </span>
+        <select class="form-control select" ng-model="editUser.type">
+          <option>user</option>
+          <option >admin</option>
+        </select>
 
     </div>
 
-    <div class="form-group col-lg-3 buttons">
-      <input type="submit" value="" class="button-save" ng-click="saveUser(editUser,forma.$valid)"
-             ng-disabled="forma.firstName.$dirty && forma.firstName.$invalid ">
+    <div class="form-group col-lg-2" ng-class="{'has-error': isShowErrors(editUserForm, 'mail')}">
 
-      <input ui-sref="users" type="button" class="button-close" ng-click="openUserForm()">
+      <span ng-hide="isShowErrors(editUserForm, 'mail')">Email</span>
+
+      <div class="span-error" ng-messages="editUserForm.mail.$error" ng-show="isShowErrors(editUserForm, 'mail')">
+        <span ng-message="required">Email required</span>
+        <span ng-message="email">Incorrect Email</span>
+        <span ng-message="unique-email">exist</span>
+      </div>
+
+      <input unique-email type="email" name="mail" size="20" placeholder="Mail" ng-model="editUser.mail"
+             ng-required="true" class="user-email">
+    </div>
+
+    <div class="form-group col-lg-4 buttons">
+      <input type="submit" value="" class="button-save" ng-click="saveUser(editUserForm,editUser)"
+             ng-disabled="editUserForm.firstName.$dirty && editUserForm.firstName.$invalid || editUserForm.mail.$dirty && editUserForm.mail.$invalid">
+
+      <input type="button" class="button-close" ng-click="openUserForm()">
     </div>
 
   </form>

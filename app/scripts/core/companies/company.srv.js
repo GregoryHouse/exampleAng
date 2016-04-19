@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-  angular.module("myApp.Companies").service('companiesSrv', function () {
+  angular.module("myApp.Companies").service('CompaniesSrv', function () {
 
     var companies = [
       {companyName: "Samsung", addressCompany: "Seocho-daero", companyMail: "samsung@mail.com", yearFoundation: "24.03.1963", workers: "1000", id: createId()},

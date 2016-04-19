@@ -1,9 +1,9 @@
 "use strict";
 (function () {
-  angular.module('myApp.Users').controller("myApp.Users.usersCtrl", function ($scope, usersSrv) {
+  angular.module('myApp.Users').controller("myApp.Users.usersCtrl", function ($scope, UsersSrv) {
 
     $scope.editUserId = '';
-    $scope.users = usersSrv.getAllUsers();
+    $scope.users = UsersSrv.getAllUsers();
 
     $scope.orderUsers = {
       predicate: 'firstName',
@@ -27,7 +27,7 @@
     };
 
     $scope.deleteUser = function (editUser) {
-      usersSrv.deleteUser(editUser);
+      UsersSrv.deleteUser(editUser);
     };
   })
 

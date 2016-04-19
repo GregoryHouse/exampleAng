@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-  angular.module("myApp", ["myApp.Users","myApp.Companies", "ui.router",'ngMessages'])
+  angular.module("myApp", ["myApp.Users","myApp.Companies", "ui.router",'ngMessages', 'ui.bootstrap'])
 
   .config([
     '$stateProvider',

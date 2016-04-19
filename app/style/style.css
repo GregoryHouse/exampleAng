@@ -80,11 +80,25 @@ li.edit div form div {
 .form-group {
   margin-bottom: 0px;
 }
+/** Form error **/
+li.edit div form div div.span-error {
+  padding: 0px;
+}
+
+li.edit div form div.has-error input {
+  border-color: red;
+}
 
 /** Buttons **/
 li.edit div form div.buttons {
   width: 150px;
   margin: 14px 0 0 20px;
+  text-align: center;
+}
+
+li.edit div form div.companies-buttons {
+  width: 150px;
+  margin: 20px 0 0 20px;
   text-align: center;
 }
 
@@ -106,7 +120,7 @@ input.button-save {
   width: 30px;
 }
 
-.button-close {
+input.button-close {
   background: url("../images/close.jpg") no-repeat;
   height: 27px;
   width: 30px;
@@ -132,3 +146,11 @@ input.has-error {
   border-color: red;
 }
 
+/** Dropdown **/
+.form-control.select {
+  height: 27px;
+  width: 174px;
+  padding: 0;
+  border-radius: 0;
+  border: 1px solid initial;
+}
