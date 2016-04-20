@@ -2,32 +2,47 @@
 (function () {
   angular.module('myApp.Users').controller("myApp.Users.usersCtrl", function ($scope, UsersSrv) {
 
-    $scope.editUserId = '';
-    $scope.users = UsersSrv.getAllUsers();
 
-    $scope.orderUsers = {
+    $scope.editUserId = '';
+    UsersSrv.getAllUsers(function(resp){
+      $scope.users = resp;
+    });
+
+    $scope.orderUser = {
       predicate: 'firstName',
       reverse: false
     };
 
-    $scope.order = function (predicate) {
-      $scope.orderUsers.reverse = ($scope.orderUsers.predicate === predicate) ? !$scope.orderUsers.reverse : false;
-      $scope.orderUsers.predicate = predicate;
+    $scope.sortUsers = function (predicate) {
+      $scope.orderUser.reverse = ($scope.orderUser.predicate === predicate) ? !$scope.orderUser.reverse : false;
+      $scope.orderUser.predicate = predicate;
     };
 
     $scope.openUserForm = function (userId) {
 
       if (!userId) {
+
         $scope.editUserId = '';
       } else if (userId === 'newUser') {
         $scope.editUserId = 'newUser';
+        $scope.editUser = {};
       } else {
-        $scope.editUserId = userId;
+        UsersSrv.getOneUserById(userId, function(resp){
+          $scope.editUser = angular.copy(resp);
+          $scope.editUserId = userId;
+        });
       }
     };
 
-    $scope.deleteUser = function (editUser) {
-      UsersSrv.deleteUser(editUser);
+    $scope.deleteUser = function (userId) {
+      UsersSrv.deleteUser(userId, function(resp){
+        for (var i = 0; i < $scope.users.length; i++) {
+          if ($scope.users[i].id === resp.id) {
+            $scope.users.splice($scope.users.indexOf($scope.users[i]), 1);
+            break;
+          }
+        }
+      });
     };
   })
 

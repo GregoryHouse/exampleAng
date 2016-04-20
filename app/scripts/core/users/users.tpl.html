@@ -1,4 +1,4 @@
-<ul ng-controller="myApp.Users.usersCtrl">
+<ul>
     <form>
         <div class="form-group">
             <div class="input-group">
@@ -18,14 +18,14 @@
     <li class="title">
 
         <div class="col-lg-2">
-            <a ng-click="order('firstName')">First Name</a>
-            <span class="sort-order" ng-show="orderUsers.predicate === 'firstName'" ng-class="{reverse: orderUsers.reverse}"></span>
+            <a ng-click="sortUsers('firstName')">First Name</a>
+            <span class="sort-order" ng-show="orderUser.predicate === 'firstName'" ng-class="{reverse: orderUser.reverse}"></span>
         </div>
 
         <div class="col-lg-2">Last Name</div>
         <div class="col-lg-2">
-            <a ng-click="order('birthDay')">Birth Day</a>
-            <span class="sort-order" ng-show="orderUsers.predicate === 'birthDay'" ng-class="{reverse: orderUsers.reverse}"></span>
+            <a ng-click="sortUsers('birthDay')">Birth Day</a>
+            <span class="sort-order" ng-show="orderUser.predicate === 'birthDay'" ng-class="{reverse: orderUser.reverse}"></span>
         </div>
 
         <div class="col-lg-2">Type</div>
@@ -34,7 +34,7 @@
     </li>
 
     <li class="user-content" ng-class="{'edit': editUserId === user.id}"
-        ng-repeat="user in users | orderBy: orderUsers.predicate: orderUsers.reverse | filter: searchName">
+        ng-repeat="user in users  | orderBy: orderUser.predicate: orderUser.reverse | filter: searchName">
 
         <div ng-include="'scripts/core/users/edit-user-form.tpl.html'" ng-if="editUserId === user.id"></div>
         <div class="row" ng-hide="editUserId === user.id">

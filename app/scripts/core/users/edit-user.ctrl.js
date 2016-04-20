@@ -2,36 +2,29 @@
 (function () {
   angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv) {
 
-    $(document).ready(function () {
-
-      $('.data-picker').datepicker({
-        format: "dd.mm.yyyy"
-      });
-
-    });
-
-
-
-    if ($scope.editUserId === 'newUser') {
-      $scope.editUser = {};
-    } else {
-      var editUser = UsersSrv.getOneUserById($scope.editUserId);
-      $scope.editUser = angular.copy(editUser);
-    }
-
-    //$scope.$watch("editUser.mail", function() {
-    //  console.log($scope.editUser.mail);
-    //});
 
     $scope.saveUser = function (form, editUser) {
       if (form.$valid) {
-        if (UsersSrv.unique(editUser.mail)) {
-          UsersSrv.saveUser(editUser, function () {
-            $scope.tryToSave = true;
-          });
-          $scope.openUserForm()
-        }
+        //if (UsersSrv.unique(editUser.mail)) {
+        UsersSrv.saveUpdateUser(editUser, function (resp) {
+
+          if (editUser.id) {
+            for (var i = 0; i < $scope.users.length; i++) {
+              if ($scope.users[i].id === editUser.id) {
+                $scope.users[i] = editUser;
+                break;
+              }
+            }
+          } else {
+            $scope.users.push(resp)
+          }
+
+          $scope.tryToSave = true;
+        });
+
+        $scope.openUserForm()
       }
+      //}
       else {
         $scope.tryToSave = true;
       }
@@ -43,34 +36,50 @@
 
   });
 
-  angular.module('myApp.Users').directive('uniqueEmail', ["UsersSrv",
-    function(UsersSrv,$q) {
-      var yes = function(n){
-        console.log(UsersSrv.unique(n))
-        return UsersSrv.unique(n)
-      }
+  //angular.module('myApp.Users').directive('uniqueEmail', ["UsersSrv",
+  //  function(UsersSrv,$q) {
+  //    var yes = function(n){
+  //      console.log(UsersSrv.unique(n))
+  //      return UsersSrv.unique(n)
+  //    }
+  //    return {
+  //      restrict: "A",
+  //      require: "ngModel",
+  //      link: function(scope, element, attributes, ngModel) {
+  //        ngModel.$asyncValidators.prime = function(modelValue) {
+  //          //var defer = $q.defer();
+  //          //$timeout(function(){
+  //            if(yes(modelValue)) {
+  //              //defer.resolve();
+  //              console.log(yes(modelValue))
+  //
+  //            } else {
+  //              //defer.reject();
+  //              console.log(modelValue)
+  //
+  //            }
+  //          //}, 2000);
+  //          //return defer.promise;
+  //        }
+  //      }
+  //    };
+  //  }
+  //]);
+
+
+  angular.module('myApp.Users').directive('datePicker',
+    function () {
+
       return {
         restrict: "A",
-        require: "ngModel",
-        link: function(scope, element, attributes, ngModel) {
-          ngModel.$asyncValidators.prime = function(modelValue) {
-            //var defer = $q.defer();
-            //$timeout(function(){
-              if(yes(modelValue)) {
-                //defer.resolve();
-                console.log(yes(modelValue))
-
-              } else {
-                //defer.reject();
-                console.log(modelValue)
-
-              }
-            //}, 2000);
-            //return defer.promise;
-          }
+        controller: "myApp.Users.editUsersCtrl",
+        link: function (scope, element) {
+          $(element).datepicker({
+            format: "dd.mm.yyyy"
+          });
         }
       };
-    }
-  ]);
+    });
+
 
 }());

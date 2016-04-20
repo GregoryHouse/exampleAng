@@ -31,7 +31,7 @@
 
       <span>Birth Day</span>
 
-      <input type="text" ng-model="editUser.birthDay" placeholder="Birth Day" class="data-picker">
+      <input type="text" ng-model="editUser.birthDay" placeholder="Birth Day" date-picker>
 
     </div>
 
@@ -56,7 +56,7 @@
         <span ng-message="unique-email">exist</span>
       </div>
 
-      <input unique-email type="email" name="mail" size="20" placeholder="Mail" ng-model="editUser.mail"
+      <input type="email" name="mail" size="20" placeholder="Mail" ng-model="editUser.mail"
              ng-required="true" class="user-email">
     </div>
 
