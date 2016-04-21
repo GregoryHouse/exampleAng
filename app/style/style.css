@@ -5,8 +5,13 @@
   text-align: center;
 }
 
-/**Links**/
+@media (min-width: 1200px) {
+  .container {
+    width: 1370px;
+  }
+}
 
+/**Links**/
 a:hover {
   cursor: pointer;
   color: purple;
@@ -21,7 +26,7 @@ li.title, .user-content, .new-user, .company-content, .new-company {
   margin: auto;
   list-style-type: none;
   height: 40px;
-  width: 1100px;
+  width: 1300px;
   text-align: center;
   border-bottom: 1px dotted gray;
 }
@@ -36,7 +41,7 @@ li.title {
 
 div.add-user, .add-company {
   width: 50px;
-  margin-left: 1008px;
+  margin-left: 1183px;
 }
 
 li.new-user, .new-company {
@@ -59,6 +64,11 @@ li.user-content.edit, li.company-content.edit {
   margin: 0 0 8px 0;
 }
 
+.companies-content li div div form div.form-group{
+  width: 190px;
+}
+
+
 /** Form **/
 li.edit div form {
 
@@ -80,8 +90,11 @@ li.edit div form div {
 .form-group {
   margin-bottom: 0px;
 }
+
 /** Form error **/
 li.edit div form div div.span-error {
+  width: 176px;
+  margin-left: 0;
   padding: 0px;
 }
 
@@ -141,7 +154,6 @@ input.button-close {
 }
 
 /** Errors **/
-
 input.has-error {
   border-color: red;
 }

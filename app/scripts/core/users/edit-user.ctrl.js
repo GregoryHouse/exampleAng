@@ -3,6 +3,7 @@
   angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv) {
 
 
+
     $scope.saveUser = function (form, editUser) {
       if (form.$valid) {
         //if (UsersSrv.unique(editUser.mail)) {
@@ -67,19 +68,7 @@
   //]);
 
 
-  angular.module('myApp.Users').directive('datePicker',
-    function () {
 
-      return {
-        restrict: "A",
-        controller: "myApp.Users.editUsersCtrl",
-        link: function (scope, element) {
-          $(element).datepicker({
-            format: "dd.mm.yyyy"
-          });
-        }
-      };
-    });
 
 
 }());

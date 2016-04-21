@@ -90,23 +90,6 @@ angular.module('myApp')
       return [201, user];
     });
 
-    //$httpBackend.whenPUT(/^\/api\/users\/\d+\-\d+\-\d+\-\d+\-\d+$/).respond(function (method, url, data, headers) {
-    //  var user = JSON.parse(data);
-    //  console.log(user.id)
-    //  for (var i = 0, l = users.length; i < l; i++) {
-    //    if (users[i].id === user.id) {
-    //      users[i] = user;
-    //      break;
-    //    }
-    //    if (i === l - 1) {
-    //      users.push(user)
-    //    }
-    //  }
-    //
-    //  return [200, user];
-    //});
-
-
     $httpBackend.whenDELETE(/^\/api\/users\/\d+\-\d+\-\d+\-\d+\-\d+$/).respond(function (method, url, data, headers) {
       var regex = /^\/api\/users\/(\d+\-\d+\-\d+\-\d+\-\d+)/g;
 
@@ -125,8 +108,7 @@ angular.module('myApp')
     });
 
     $httpBackend.whenGET(/\.html/).passThrough();
-  })
-;
+  });
 
 function createId() {
   function s4() {
@@ -138,3 +120,21 @@ function createId() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
+
+
+
+//$httpBackend.whenPUT(/^\/api\/users\/\d+\-\d+\-\d+\-\d+\-\d+$/).respond(function (method, url, data, headers) {
+//  var user = JSON.parse(data);
+//  console.log(user.id)
+//  for (var i = 0, l = users.length; i < l; i++) {
+//    if (users[i].id === user.id) {
+//      users[i] = user;
+//      break;
+//    }
+//    if (i === l - 1) {
+//      users.push(user)
+//    }
+//  }
+//
+//  return [200, user];
+//});

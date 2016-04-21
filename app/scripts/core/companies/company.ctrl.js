@@ -1,35 +1,15 @@
 "use strict";
 (function () {
-  angular.module('myApp.Companies').controller("myApp.Companies.companiesCtrl", function ($scope, CompaniesSrv) {
+  angular.module('myApp.Users').controller("myApp.Companies.companyCtrl", function ($scope, UsersSrv, CompaniesSrv) {
 
-    $scope.editCompanyId = '';
-    $scope.companies = CompaniesSrv.getAllCompanies();
-
-    $scope.orderCompanies = {
-      predicate: 'companyName',
-      reverse: false
-    };
-
-    $scope.order = function (predicate) {
-      $scope.orderCompanies.reverse = ($scope.orderCompanies.predicate === predicate) ? !$scope.orderCompanies.reverse : false;
-      $scope.orderCompanies.predicate = predicate;
-    };
-
-    $scope.openCompanyForm = function (companyId) {
-      if (!companyId) {
-        $scope.editCompanyId = '';
-      } else if (companyId === 'newCompany') {
-        $scope.editCompanyId = 'newCompany';
-      } else {
-        $scope.editCompanyId = companyId;
+    CompaniesSrv.getOneCompanyById($scope.company.id, function (resp) {
+      $scope.usersNames = '';
+      for (var i = 0; i < resp.clients.length; i++) {
+        $scope.usersNames += resp.clients[i].userName + '; ';
       }
+    })
 
-    };
-
-    $scope.deleteCompany = function (editCompany) {
-      CompaniesSrv.deleteCompany(editCompany);
-    };
-  });
+  })
 
 }());
 

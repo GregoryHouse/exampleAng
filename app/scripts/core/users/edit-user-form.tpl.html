@@ -5,7 +5,8 @@
 
       <span ng-hide="isShowErrors(editUserForm, 'firstName')">First Name</span>
 
-      <div class="span-error" ng-messages="editUserForm.firstName.$error" ng-show="isShowErrors(editUserForm, 'firstName')">
+      <div class="span-error" ng-messages="editUserForm.firstName.$error"
+           ng-show="isShowErrors(editUserForm, 'firstName')">
         <span ng-message="required">First Name is required</span>
         <span ng-message="minlength">First Name is too short</span>
         <span ng-message="maxlength">First Name is too long</span>
@@ -19,7 +20,8 @@
 
       <span ng-hide="isShowErrors(editUserForm, 'lastName')">Last Name</span>
 
-      <div class="span-error" ng-messages="editUserForm.lastName.$error" ng-show="isShowErrors(editUserForm, 'lastName')">
+      <div class="span-error" ng-messages="editUserForm.lastName.$error"
+           ng-show="isShowErrors(editUserForm, 'lastName')">
         <span ng-message="maxlength">Last Name is too long</span>
       </div>
 
@@ -31,7 +33,7 @@
 
       <span>Birth Day</span>
 
-      <input type="text" ng-model="editUser.birthDay" placeholder="Birth Day" date-picker>
+      <input date-picker type="text" ng-model="editUser.birthDay" placeholder="Birth Day">
 
     </div>
 
@@ -39,10 +41,22 @@
 
       <span>Type</span>
 
-        <select class="form-control select" ng-model="editUser.type">
-          <option>user</option>
-          <option >admin</option>
-        </select>
+      <select class="form-control select" ng-model="editUser.type">
+        <option>user</option>
+        <option>admin</option>
+      </select>
+
+    </div>
+
+    <div class="form-group col-lg-2">
+
+      <span>Company</span>
+
+      <select class="form-control select" ng-model="editUser.company">
+        <option>Samsung</option>
+        <option>Lenovo</option>
+        <option>Apple</option>
+      </select>
 
     </div>
 
@@ -60,7 +74,7 @@
              ng-required="true" class="user-email">
     </div>
 
-    <div class="form-group col-lg-4 buttons">
+    <div class="form-group col-lg-2 buttons">
       <input type="submit" value="" class="button-save" ng-click="saveUser(editUserForm,editUser)"
              ng-disabled="editUserForm.firstName.$dirty && editUserForm.firstName.$invalid || editUserForm.mail.$dirty && editUserForm.mail.$invalid">
 

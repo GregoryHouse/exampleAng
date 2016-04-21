@@ -1,4 +1,4 @@
-<ul ng-controller="myApp.Companies.companiesCtrl">
+<ul ng-controller="myApp.Companies.companiesCtrl" class="companies-content">
   <form>
     <div class="form-group">
       <div class="input-group">
@@ -18,15 +18,15 @@
   <li class="title">
 
     <div class="col-lg-2">
-      <a ng-click="order('companyName')">Company Name</a>
-      <span class="sort-order" ng-show="orderCompanies.predicate === 'companyName'"
-            ng-class="{reverse: orderCompanies.reverse}"></span>
+      <a ng-click="sortCompanies('companyName')">Company Name</a>
+      <span class="sort-order" ng-show="orderCompany.predicate === 'companyName'"
+            ng-class="{reverse: orderCompany.reverse}"></span>
     </div>
 
     <div class="col-lg-2">
-      <a ng-click="order('addressCompany')">Address Company</a>
-      <span class="sort-order" ng-show="orderCompanies.predicate === 'addressCompany'"
-            ng-class="{reverse: orderCompanies.reverse}"></span>
+      <a ng-click="sortCompanies('addressCompany')">Address Company</a>
+      <span class="sort-order" ng-show="orderCompany.predicate === 'addressCompany'"
+            ng-class="{reverse: orderCompany.reverse}"></span>
     </div>
 
     <div class="col-lg-2">Company Email</div>
@@ -35,8 +35,8 @@
 
   </li>
 
-  <li class="company-content" ng-class="{'edit': editCompanyId === company.id}"
-      ng-repeat="company in companies | orderBy: orderCompanies.predicate: orderCompanies.reverse | filter: searchName">
+  <li class="company-content" ng-class="{'edit': editCompanyId === company.id}" ng-controller="myApp.Companies.companyCtrl"
+      ng-repeat="company in companies | orderBy: orderCompany.predicate: orderCompany.reverse | filter: searchName" >
 
     <div ng-include="'scripts/core/companies/edit-company-form.tpl.html'" ng-if="editCompanyId === company.id"></div>
     <div class="row" ng-hide="editCompanyId === company.id">
@@ -53,7 +53,7 @@
         {{ company.yearFoundation }}
       </div>
       <div class="col-lg-2">
-        {{ company.workers }}
+        {{ usersNames }}
       </div>
 
       <div class="col-lg-2 buttons">

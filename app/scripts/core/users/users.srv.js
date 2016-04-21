@@ -6,10 +6,12 @@
       saveUpdateUser: saveUpdateUser,
       deleteUser: deleteUser,
       getAllUsers: getAllUsers,
-      getOneUserById: getOneUserById
+      getOneUserById: getOneUserById,
+      //changeUserCompany: changeUserCompany
       //unique: unique
     };
 
+    //changeUserCompany(UserId, companyId)
     function saveUpdateUser(editUser, callback) {
 
       return $http.post('/api/users', editUser)
