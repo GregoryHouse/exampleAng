@@ -2,8 +2,6 @@
 (function () {
   angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv) {
 
-
-
     $scope.saveUser = function (form, editUser) {
       if (form.$valid) {
         //if (UsersSrv.unique(editUser.mail)) {
@@ -35,6 +33,14 @@
       return form && form[formFild] && (form[formFild].$dirty || form[formFild].$touched || $scope.tryToSave) && form[formFild].$invalid;
     }
 
+  });
+
+
+  angular.module('myApp.Users').controller("myApp.Users.editUserCtrl", function ($scope, CompaniesSrv) {
+
+    CompaniesSrv.getAllCompanies(function(resp){
+      $scope.companies = resp
+    });
   });
 
   //angular.module('myApp.Users').directive('uniqueEmail', ["UsersSrv",

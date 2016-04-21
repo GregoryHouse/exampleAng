@@ -52,10 +52,10 @@
 
       <span>Company</span>
 
-      <select class="form-control select" ng-model="editUser.company">
-        <option>Samsung</option>
-        <option>Lenovo</option>
-        <option>Apple</option>
+      <select class="form-control select" ng-model="editUser.company.id" ng-controller="myApp.Users.editUserCtrl">
+        <option ng-repeat="company in companies">{{company.id}}</option>
+        <!--<option>Lenovo</option>-->
+        <!--<option>Apple</option>-->
       </select>
 
     </div>
