@@ -1,31 +1,58 @@
 "use strict";
 (function () {
-  angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv) {
+  angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv, CompaniesSrv) {
 
-    $scope.saveUser = function (form, editUser) {
+    if($scope.editUserId === 'newUser'){
+      $scope.editUser = {};
+    } else {
+      $scope.editUser = UsersSrv.getOneUserById($scope.editUserId, function(resp){
+        $scope.editUser = angular.copy(resp);
+        $scope.editUserOrg = angular.copy(resp);
+      });
+    }
+
+    $scope.saveUser = function (form) {
       if (form.$valid) {
         //if (UsersSrv.unique(editUser.mail)) {
-        UsersSrv.saveUpdateUser(editUser, function (resp) {
 
-          if (editUser.id) {
-            for (var i = 0; i < $scope.users.length; i++) {
-              if ($scope.users[i].id === editUser.id) {
-                $scope.users[i] = editUser;
-                break;
+        if($scope.editUser !== $scope.editUserOrg) {
+          UsersSrv.saveUpdateUser($scope.editUser, function (resp) {
+
+            if ($scope.editUser.id) {
+              for (var i = 0; i < $scope.users.length; i++) {
+                if ($scope.users[i].id === $scope.editUser.id) {
+                  $scope.users[i] = $scope.editUser;
+                  break;
+                }
               }
+            } else {
+              $scope.users.push(resp)
             }
-          } else {
-            $scope.users.push(resp)
-          }
 
-          $scope.tryToSave = true;
-        });
-
+            //$scope.tryToSave = true;
+          });
+        }
         $scope.openUserForm()
       }
       //}
       else {
         $scope.tryToSave = true;
+      }
+    };
+
+    CompaniesSrv.getAllCompanies(function(resp){
+      $scope.companies = resp;
+      $scope.userCompany = "";
+    });
+
+    $scope.selectCompany = function(company){
+
+      console.log(company)
+      if($scope.editUser.company.id !== company.id) {
+        $scope.userCompany = company.name;
+        $scope.editUser.company = {id: company.id}
+      } else {
+        $scope.userCompany = company.name;
       }
     };
 
@@ -35,13 +62,6 @@
 
   });
 
-
-  angular.module('myApp.Users').controller("myApp.Users.editUserCtrl", function ($scope, CompaniesSrv) {
-
-    CompaniesSrv.getAllCompanies(function(resp){
-      $scope.companies = resp
-    });
-  });
 
   //angular.module('myApp.Users').directive('uniqueEmail', ["UsersSrv",
   //  function(UsersSrv,$q) {

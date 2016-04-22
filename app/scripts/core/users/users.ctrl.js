@@ -21,16 +21,11 @@
     $scope.openUserForm = function (userId) {
 
       if (!userId) {
-
         $scope.editUserId = '';
       } else if (userId === 'newUser') {
         $scope.editUserId = 'newUser';
-        $scope.editUser = {};
       } else {
-        UsersSrv.getOneUserById(userId, function(resp){
-          $scope.editUser = angular.copy(resp);
           $scope.editUserId = userId;
-        });
       }
     };
 

@@ -37,13 +37,20 @@
 
     </div>
 
-    <div class="form-group col-lg-2">
+    <div class="form-group col-lg-2" uib-dropdown>
 
       <span>Type</span>
 
+        <!--<input type="text" ng-value="userType" uib-dropdown-toggle>-->
+
+        <!--<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">-->
+          <!--<li role="menuitem"></li>-->
+          <!--<li role="menuitem"></li>-->
+        <!--</ul>-->
+
       <select class="form-control select" ng-model="editUser.type">
-        <option>user</option>
-        <option>admin</option>
+      <option>user</option>
+      <option>admin</option>
       </select>
 
     </div>
@@ -52,11 +59,32 @@
 
       <span>Company</span>
 
-      <select class="form-control select" ng-model="editUser.company.id" ng-controller="myApp.Users.editUserCtrl">
-        <option ng-repeat="company in companies">{{company.id}}</option>
-        <!--<option>Lenovo</option>-->
-        <!--<option>Apple</option>-->
-      </select>
+      <!--<select class="form-control select">-->
+      <!--<option ng-repeat="company in companies" ng-click="selectCompany(company.id)">-->
+      <!--{{company.companyName}}-->
+      <!--</option>-->
+      <!--&lt;!&ndash;<option>Lenovo</option>&ndash;&gt;-->
+      <!--&lt;!&ndash;<option>Apple</option>&ndash;&gt;-->
+      <!--</select>-->
+
+      <input type="text"
+             class="form-control"
+             ng-model="editUser.company.id"
+             placeholder="Enter Company"
+             uib-typeahead="item.id as item.id for item in companies | filter:$viewValue"
+             typeahead-template-url="scripts/core/users/userCompany-typeahead.html"
+             typeahead-min-length="0"/>
+
+
+      <!--<input type="text" ng-value="userCompany" uib-dropdown-toggle>-->
+
+      <!--<div class="dropdown-menu" uib-dropdown-menu>-->
+        <!--<div ng-repeat="company in companies" ng-click="selectCompany(company)">-->
+          <!--{{ company.name }}-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<input type="hidden" ng-model="editUser.company.id" ng-required="true" name="company">-->
 
     </div>
 
@@ -75,7 +103,7 @@
     </div>
 
     <div class="form-group col-lg-2 buttons">
-      <input type="submit" value="" class="button-save" ng-click="saveUser(editUserForm,editUser)"
+      <input type="submit" value="" class="button-save" ng-click="saveUser(editUserForm)"
              ng-disabled="editUserForm.firstName.$dirty && editUserForm.firstName.$invalid || editUserForm.mail.$dirty && editUserForm.mail.$invalid">
 
       <input type="button" class="button-close" ng-click="openUserForm()">

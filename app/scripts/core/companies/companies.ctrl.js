@@ -22,14 +22,9 @@
         $scope.editCompanyId = '';
       } else if (companyId === 'newCompany') {
         $scope.editCompanyId = 'newCompany';
-        $scope.editCompany = {};
       } else {
-        CompaniesSrv.getOneCompanyById(companyId, function(resp){
-          $scope.editCompany = angular.copy(resp);
-          $scope.editCompanyId = companyId;
-        });
+        $scope.editCompanyId = companyId;
       }
-
     };
 
     $scope.deleteCompany = function (editCompany) {

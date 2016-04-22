@@ -4,6 +4,7 @@
 
     CompaniesSrv.getOneCompanyById($scope.company.id, function (resp) {
       $scope.usersNames = '';
+
       for (var i = 0; i < resp.clients.length; i++) {
         $scope.usersNames += resp.clients[i].userName + '; ';
       }

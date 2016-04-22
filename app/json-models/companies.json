@@ -1,0 +1,24 @@
+[
+  {
+    name: "Samsung",
+    addressCompany: "Seocho-daero",
+    companyMail: "samsung@mail.com",
+    yearFoundation: "24.03.1963",
+    //clientUsers: [{id: "userId"}, {id: "userId"}, {id: "userId"}]
+    id: createId()
+  },
+  {
+    name: "Lenovo",
+    addressCompany: "Apachi",
+    companyMail: "lenovo@mail.com",
+    yearFoundation: "12.03.1989",
+    id: createId()
+  },
+  {
+    name: "Apple",
+    addressCompany: "Cupertino",
+    companyMail: "apple@mail.com",
+    yearFoundation: "31.11.1990",
+    id: createId()
+  }
+]

@@ -2,6 +2,14 @@
 (function () {
   angular.module('myApp.Companies').controller("myApp.Companies.editCompaniesCtrl", function ($scope, CompaniesSrv) {
 
+    if ($scope.editCompanyId === 'newCompany') {
+      $scope.editCompany = {};
+    } else {
+      $scope.editCompany = CompaniesSrv.getOneCompanyById($scope.editCompanyId, function (resp) {
+        $scope.editCompany = angular.copy(resp);
+        $scope.editCompanyOrg = angular.copy(resp);
+      });
+    }
 
     $scope.saveCompany = function (form, editCompany) {
 
