@@ -1,6 +1,6 @@
-<!--<div>{{dynamicPopover.content}}</div>-->
-<!--<div class="form-group">-->
-  <div>
-    <div class="" ng-repeat="user in companyUsers">User: {{ user.firstName }}, {{ user.lastName }}</div>
+<div>
+  <div ng-repeat="user in companyUsers">
+    User: {{ user.firstName + ' ' + user.lastName }}
   </div>
-<!--</div>-->
+</div>
+

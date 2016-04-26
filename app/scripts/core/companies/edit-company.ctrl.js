@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-  angular.module('myApp.Companies').controller("myApp.Companies.editCompaniesCtrl", function ($scope, CompaniesSrv) {
+  angular.module('myApp.Companies').controller("myApp.Companies.editCompaniesCtrl", ['$scope', 'CompaniesSrv', function ($scope, CompaniesSrv) {
 
     if ($scope.editCompanyId === 'newCompany') {
       $scope.editCompany = {};
@@ -40,7 +40,7 @@
       return form && form[formFild] && (form[formFild].$dirty || form[formFild].$touched || $scope.tryToSave) && form[formFild].$invalid;
     }
 
-  });
+  }]);
 
 
 }());

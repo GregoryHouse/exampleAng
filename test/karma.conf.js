@@ -37,6 +37,9 @@ module.exports = function(config) {
       'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
       'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

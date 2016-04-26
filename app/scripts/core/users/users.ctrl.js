@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-  angular.module('myApp.Users').controller("myApp.Users.usersCtrl", function ($scope, UsersSrv) {
+  angular.module('myApp.Users').controller("myApp.Users.usersCtrl", ['$scope', 'UsersSrv', function ($scope, UsersSrv) {
 
     $scope.userRole = {
       'ADMIN': 'Admin',
@@ -43,7 +43,7 @@
         }
       });
     };
-  })
+  }])
 
 }());
 

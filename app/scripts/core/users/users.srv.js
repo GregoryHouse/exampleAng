@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-  angular.module("myApp.Users").service('UsersSrv', function ($http) {
+  angular.module("myApp.Users").service('UsersSrv', ['$http', function ($http) {
 
     var UsersSrv = {
       saveUpdateUser: saveUpdateUser,
@@ -28,7 +28,6 @@
 
         return $http.post('/api/users', user)
           .then(function success(resp) {
-            console.log('success', resp.data);
             if (callback) {
               callback(resp.data)
             }
@@ -81,8 +80,7 @@
     //}
 
     return UsersSrv;
-  });
+  }]);
 
-})
-();
+})();
 

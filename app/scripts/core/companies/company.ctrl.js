@@ -1,7 +1,6 @@
 "use strict";
 (function () {
-  angular.module('myApp.Companies').controller("myApp.Companies.companyCtrl", function ($scope, UsersSrv, CompaniesSrv) {
-
+  angular.module('myApp.Companies').controller("myApp.Companies.companyCtrl", ['$scope', 'UsersSrv', 'CompaniesSrv', function ($scope, UsersSrv, CompaniesSrv) {
 
     CompaniesSrv.getOneCompanyById($scope.company.id, function (resp) {
       $scope.clientsCompany = resp.clients.length;
@@ -15,11 +14,7 @@
         });
       }
     });
-
-
-  })
-
-
+  }])
 
 }());
 

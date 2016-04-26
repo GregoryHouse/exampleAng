@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-  angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv, CompaniesSrv) {
+  angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", ['$scope', 'UsersSrv', 'CompaniesSrv', function ($scope, UsersSrv, CompaniesSrv) {
 
     if ($scope.editUserId === 'newUser') {
       $scope.editUser = {
@@ -46,8 +46,6 @@
           } else {
             $scope.users.push(resp)
           }
-
-          //$scope.tryToSave = true;
         });
 
         $scope.openUserForm()
@@ -58,22 +56,15 @@
       }
     };
 
-    $scope.selectCompany = function (company, formField) {
-      console.log($scope.editUser);
-      console.log(company);
-      $scope.editUser.company.id = company.id;
-
-      //if($scope.editUser.company.id !== company.id) {
-      //
-      //} else {
-      //}
-    };
+    //$scope.selectCompany = function (company, formField) {
+    //  $scope.editUser.company.id = company.id;
+    //};
 
     $scope.isShowErrors = function (form, formFild) {
       return form && form[formFild] && (form[formFild].$dirty || form[formFild].$touched || $scope.tryToSave) && form[formFild].$invalid;
     }
 
-  });
+}]);
 
 
   //angular.module('myApp.Users').directive('uniqueEmail', ["UsersSrv",
