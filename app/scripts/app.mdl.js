@@ -27,7 +27,7 @@
             url: "/companies",
             controller: "myApp.Companies.companiesCtrl",
             templateUrl: 'scripts/core/companies/companies.tpl.html'
-          })
+          });
         //.state('companies.edit', {
         //  url: "/editCompany",
         //  templateUrl: "scripts/core/companies/edit-company-form.tpl.html"

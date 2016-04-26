@@ -41,50 +41,36 @@
 
       <span>Type</span>
 
-        <!--<input type="text" ng-value="userType" uib-dropdown-toggle>-->
+        <input type="text" ng-value="userRole[editUser.type]" uib-dropdown-toggle ng-readonly="true">
 
-        <!--<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">-->
-          <!--<li role="menuitem"></li>-->
-          <!--<li role="menuitem"></li>-->
-        <!--</ul>-->
-
-      <select class="form-control select" ng-model="editUser.type">
-      <option>user</option>
-      <option>admin</option>
-      </select>
+        <ul class="dropdown-menu" uib-dropdown-menu>
+          <li  ng-repeat="(key, value) in userRole" ng-click="chooseRole(key)">
+            <a>{{ value }}</a>
+          </li>
+        </ul>
 
     </div>
 
-    <div class="form-group col-lg-2">
+    <div class="form-group col-lg-2" ng-if="companies && companies.length"
+         ng-class="{'has-error': isShowErrors(editUserForm, 'company')}">
 
-      <span>Company</span>
+      <span ng-hide="isShowErrors(editUserForm, 'company')">Company</span>
 
-      <!--<select class="form-control select">-->
-      <!--<option ng-repeat="company in companies" ng-click="selectCompany(company.id)">-->
-      <!--{{company.companyName}}-->
-      <!--</option>-->
-      <!--&lt;!&ndash;<option>Lenovo</option>&ndash;&gt;-->
-      <!--&lt;!&ndash;<option>Apple</option>&ndash;&gt;-->
-      <!--</select>-->
+      <div class="span-error" ng-messages="editUserForm.company.$error" ng-show="isShowErrors(editUserForm, 'company')">
+        <span ng-message="required">Select a Company</span>
 
-      <input type="text"
-             class="form-control"
-             ng-model="editUser.company.id"
+      </div>
+
+      <input type="text"  ng-required="true"
+             name="company"
+             ng-model="editUser.company" typeahead-editable="false"
              placeholder="Enter Company"
-             uib-typeahead="item.id as item.id for item in companies | filter:$viewValue"
+             typeahead-input-formatter="formatCompany($model)"
+             uib-typeahead="item as item.name for item in companies | filter:$viewValue"
              typeahead-template-url="scripts/core/users/userCompany-typeahead.html"
              typeahead-min-length="0"/>
 
-
-      <!--<input type="text" ng-value="userCompany" uib-dropdown-toggle>-->
-
-      <!--<div class="dropdown-menu" uib-dropdown-menu>-->
-        <!--<div ng-repeat="company in companies" ng-click="selectCompany(company)">-->
-          <!--{{ company.name }}-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<input type="hidden" ng-model="editUser.company.id" ng-required="true" name="company">-->
+      <input type="hidden" ng-model="editUser.company.id" ng-required="true" name="company">
 
     </div>
 

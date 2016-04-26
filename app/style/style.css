@@ -91,6 +91,10 @@ li.edit div form div {
   margin-bottom: 0px;
 }
 
+input.popover-input {
+  border: none;
+}
+
 /** Form error **/
 li.edit div form div div.span-error {
   width: 176px;

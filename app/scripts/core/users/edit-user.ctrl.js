@@ -2,36 +2,54 @@
 (function () {
   angular.module('myApp.Users').controller("myApp.Users.editUsersCtrl", function ($scope, UsersSrv, CompaniesSrv) {
 
-    if($scope.editUserId === 'newUser'){
-      $scope.editUser = {};
+    if ($scope.editUserId === 'newUser') {
+      $scope.editUser = {
+        type: 'USER'
+      };
     } else {
-      $scope.editUser = UsersSrv.getOneUserById($scope.editUserId, function(resp){
+      UsersSrv.getOneUserById($scope.editUserId, function (resp) {
         $scope.editUser = angular.copy(resp);
-        $scope.editUserOrg = angular.copy(resp);
       });
     }
+
+    CompaniesSrv.getAllCompanies(function (resp) {
+      $scope.companies = resp;
+    });
+
+    $scope.formatCompany = function (company) {
+      if (company && company.id && $scope.companies) {
+        for(var i = 0, len = $scope.companies.length; i < len; i++){
+          if(company.id === $scope.companies[i].id){
+            return $scope.companies[i].name;
+          }
+        }
+      }
+    };
+
+    $scope.chooseRole = function (key) {
+      $scope.editUser.type = key;
+    };
 
     $scope.saveUser = function (form) {
       if (form.$valid) {
         //if (UsersSrv.unique(editUser.mail)) {
 
-        if($scope.editUser !== $scope.editUserOrg) {
-          UsersSrv.saveUpdateUser($scope.editUser, function (resp) {
+        UsersSrv.saveUpdateUser($scope.editUser, function (resp) {
 
-            if ($scope.editUser.id) {
-              for (var i = 0; i < $scope.users.length; i++) {
-                if ($scope.users[i].id === $scope.editUser.id) {
-                  $scope.users[i] = $scope.editUser;
-                  break;
-                }
+          if (resp.company.id) {
+            for (var i = 0; i < $scope.users.length; i++) {
+              if ($scope.users[i].id === resp.id) {
+                $scope.users[i] = resp;
+                break;
               }
-            } else {
-              $scope.users.push(resp)
             }
+          } else {
+            $scope.users.push(resp)
+          }
 
-            //$scope.tryToSave = true;
-          });
-        }
+          //$scope.tryToSave = true;
+        });
+
         $scope.openUserForm()
       }
       //}
@@ -40,20 +58,15 @@
       }
     };
 
-    CompaniesSrv.getAllCompanies(function(resp){
-      $scope.companies = resp;
-      $scope.userCompany = "";
-    });
+    $scope.selectCompany = function (company, formField) {
+      console.log($scope.editUser);
+      console.log(company);
+      $scope.editUser.company.id = company.id;
 
-    $scope.selectCompany = function(company){
-
-      console.log(company)
-      if($scope.editUser.company.id !== company.id) {
-        $scope.userCompany = company.name;
-        $scope.editUser.company = {id: company.id}
-      } else {
-        $scope.userCompany = company.name;
-      }
+      //if($scope.editUser.company.id !== company.id) {
+      //
+      //} else {
+      //}
     };
 
     $scope.isShowErrors = function (form, formFild) {
@@ -92,9 +105,6 @@
   //    };
   //  }
   //]);
-
-
-
 
 
 }());

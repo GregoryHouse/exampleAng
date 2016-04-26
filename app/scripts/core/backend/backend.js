@@ -4,62 +4,55 @@ angular.module('myApp')
     $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
   })
 
-  .run(function ($httpBackend) {
+  .run(function ($httpBackend, $http) {
 
-    var companies = [
-      {
-        name: "Samsung",
-        addressCompany: "Seocho-daero",
-        companyMail: "samsung@mail.com",
-        yearFoundation: "24.03.1963",
-        //clientUsers: [{id: "userId"}, {id: "userId"}, {id: "userId"}]
-        id: createId()
-      },
-      {
-        name: "Lenovo",
-        addressCompany: "Apachi",
-        companyMail: "lenovo@mail.com",
-        yearFoundation: "12.03.1989",
-        id: createId()
-      },
-      {
-        name: "Apple",
-        addressCompany: "Cupertino",
-        companyMail: "apple@mail.com",
-        yearFoundation: "31.11.1990",
-        id: createId()
-      }
-    ];
+    var companies, users;
 
-    var users = [
-      {
-        firstName: "Jon",
-        lastName: "Malkovich",
-        company: {id: companies[0].id},
-        birthDay: "24.03.1963",
-        type: "user",
-        mail: "jon@mail.com",
-        id: createId()
-      },
-      {
-        firstName: "Ivan",
-        lastName: "Ivanov",
-        company: {id: companies[0].id},
-        birthDay: "27.08.1959",
-        type: "user",
-        mail: "petrov@mail.com",
-        id: createId()
-      },
-      {
-        firstName: "Petr",
-        lastName: "First",
-        company: {id: companies[0].id},
-        birthDay: "08.12.1989",
-        type: "admin",
-        mail: "stpiter@mail.com",
-        id: createId()
-      }
-    ];
+    var initCompany = new Promise(function (resolve, reject) {
+      $http({
+        method: 'GET',
+        url: '/json-models/companies.json'
+      }).then(function successCallback(response) {
+        companies = response.data;
+
+        for (var j = 0, l = companies.length; j < l; j++) {
+          companies[j].id = createId();
+        }
+
+        resolve(companies)
+      }, function errorCallback(response) {
+        throw response
+      });
+    });
+
+    var initUsers = new Promise(function (resolve, reject) {
+      $http({
+        method: 'GET',
+        url: '/json-models/users.json'
+      }).then(function successCallback(response) {
+        users = response.data;
+
+        for (var j = 0, l = users.length; j < l; j++) {
+          users[j].id = createId();
+          var randomCompanyIndex = Math.floor(Math.random() * (companies.length));
+
+          users[j].company = {
+            id: companies[randomCompanyIndex].id
+          };
+          //companies[randomCompanyIndex].clients.push({id: users[j].id})
+        }
+
+        resolve(users)
+
+      }, function errorCallback(response) {
+        throw response
+      });
+    });
+
+    initCompany
+      .then(initUsers);
+
+
 
     function userInCompany() {
 
@@ -68,16 +61,15 @@ angular.module('myApp')
 
         for (var m = 0, k = users.length; m < k; m++) {
           if (companies[j].id === users[m].company.id) {
-            companies[j].clients.push({userName: users[m].firstName, id: users[m].id});
+            companies[j].clients.push({id: users[m].id});
           }
         }
       }
     }
 
     $httpBackend.whenGET('/api/companies').respond(function () {
-
       userInCompany();
-      return [200, companies];
+      return [200, companies]
     });
 
     $httpBackend.whenGET(/^\/api\/companies\/\d+$/).respond(function (method, url, data, headers) {
@@ -131,9 +123,11 @@ angular.module('myApp')
       return [204, company];
     });
 
-    $httpBackend.whenGET('/api/users').respond(200, users);
+    $httpBackend.whenGET('/api/users').respond(function(){
+      return [200, users];
+    });
 
-    $httpBackend.whenGET(/^\/api\/users\/\d+$/).respond(function (method, url, data, headers) {            id: createId()
+    $httpBackend.whenGET(/^\/api\/users\/\d+$/).respond(function (method, url, data, headers) {
 
       var regex = /^\/api\/users\/(\d+)/g;
 
@@ -184,7 +178,7 @@ angular.module('myApp')
       return [204, user];
     });
 
-    $httpBackend.whenGET(/\.html/).passThrough();
+    $httpBackend.whenGET(/\.html|\.json/).passThrough();
   });
 
 function createId() {

@@ -2,6 +2,10 @@
 (function () {
   angular.module('myApp.Users').controller("myApp.Users.usersCtrl", function ($scope, UsersSrv) {
 
+    $scope.userRole = {
+      'ADMIN': 'Admin',
+      'USER': 'User'
+    };
 
     $scope.editUserId = '';
     UsersSrv.getAllUsers(function(resp){

@@ -7,7 +7,6 @@
     } else {
       $scope.editCompany = CompaniesSrv.getOneCompanyById($scope.editCompanyId, function (resp) {
         $scope.editCompany = angular.copy(resp);
-        $scope.editCompanyOrg = angular.copy(resp);
       });
     }
 

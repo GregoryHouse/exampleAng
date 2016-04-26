@@ -1,29 +1,26 @@
 [
   {
-    firstName: "Jon",
-    lastName:"Malkovich",
-    company: {id: companies[0].id},
-  birthDay: "24.03.1963",
-  type: "user",
-  mail: "jon@mail.com",
-  id: createId()
-},
+    "firstName": "Jon",
+    "lastName": "Malkovich",
+    "birthDay": "24.03.1963",
+    "type": "USER",
+    "mail": "jon@mail.com",
+    "id": "3165"
+  },
   {
-    firstName: "Ivan",
-    lastName:"Ivanov",
-    company: {id: companies[0].id},
-  birthDay: "27.08.1959",
-  type: "user",
-  mail: "petrov@mail.com",
-  id: createId()
-},
+    "firstName": "Ivan",
+    "lastName": "Ivanov",
+    "birthDay": "27.08.1959",
+    "type": "USER",
+    "mail": "petrov@mail.com",
+    "id": "06241"
+  },
   {
-    firstName: "Petr",
-    lastName:"First",
-    company: {id: companies[0].id},
-  birthDay: "08.12.1989",
-  type: "admin",
-  mail: "stpiter@mail.com",
-  id: createId()
-}
+    "firstName": "Petr",
+    "lastName": "First",
+    "birthDay": "08.12.1989",
+    "type": "ADMIN",
+    "mail": "stpiter@mail.com",
+    "id": "11868"
+  }
 ]

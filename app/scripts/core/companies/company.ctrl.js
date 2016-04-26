@@ -1,16 +1,25 @@
 "use strict";
 (function () {
-  angular.module('myApp.Users').controller("myApp.Companies.companyCtrl", function ($scope, UsersSrv, CompaniesSrv) {
+  angular.module('myApp.Companies').controller("myApp.Companies.companyCtrl", function ($scope, UsersSrv, CompaniesSrv) {
+
 
     CompaniesSrv.getOneCompanyById($scope.company.id, function (resp) {
-      $scope.usersNames = '';
+      $scope.clientsCompany = resp.clients.length;
 
-      for (var i = 0; i < resp.clients.length; i++) {
-        $scope.usersNames += resp.clients[i].userName + '; ';
+      $scope.companyClients = resp.clients;
+      $scope.companyUsers = [];
+
+      for (var j = 0, l = $scope.companyClients.length; j < l; j++) {
+        UsersSrv.getOneUserById($scope.companyClients[j].id, function (resp) {
+          $scope.companyUsers.push({firstName: resp.firstName, lastName: resp.lastName});
+        });
       }
-    })
+    });
+
 
   })
+
+
 
 }());
 

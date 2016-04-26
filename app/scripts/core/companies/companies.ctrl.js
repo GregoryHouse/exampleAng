@@ -2,6 +2,12 @@
 (function () {
   angular.module('myApp.Companies').controller("myApp.Companies.companiesCtrl", function ($scope, CompaniesSrv) {
 
+    //$scope.dynamicPopover = {
+    //  //content: 'Hello, World!',
+    //  templateUrl: 'scripts/core/companies/companiesPopoverTemplate.html',
+    //  title: 'Clients'
+    //};
+
     $scope.editCompanyId = '';
     CompaniesSrv.getAllCompanies(function(resp){
       $scope.companies = resp;

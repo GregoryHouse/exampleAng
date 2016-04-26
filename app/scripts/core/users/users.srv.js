@@ -7,22 +7,35 @@
       deleteUser: deleteUser,
       getAllUsers: getAllUsers,
       getOneUserById: getOneUserById,
-      //changeUserCompany: changeUserCompany
       //unique: unique
     };
 
-    //changeUserCompany(UserId, companyId)
     function saveUpdateUser(editUser, callback) {
 
-      return $http.post('/api/users', editUser)
-        .then(function success(resp) {
-          console.log('success', resp.data);
-          if(callback){
-            callback(resp.data)
-          }
-        }, function error() {
-          return console.log('error');
-        })
+      if (!editUser.name && editUser.name > 3) {
+        throw 'Name is required'
+      } else {
+
+        var user = {
+          firstName: editUser.firstName,
+          lastName: editUser.lastName,
+          company: {id: editUser.company.id},
+          birthDay: editUser.birthDay,
+          type: editUser.type,
+          mail: editUser.mail,
+          id: editUser.id
+        };
+
+        return $http.post('/api/users', user)
+          .then(function success(resp) {
+            console.log('success', resp.data);
+            if (callback) {
+              callback(resp.data)
+            }
+          }, function error() {
+            return console.log('error');
+          })
+      }
     }
 
     function deleteUser(removeUser, callback) {
