@@ -50,10 +50,10 @@
         {{ company.companyMail }}
       </div>
       <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-2">
-        {{ company.yearFoundation | date:'yyyy/MM/dd' }}
+        {{ company.yearFoundation | date:'dd.MM.yyyy' }}
       </div>
       <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-2">
-        <div hover-popover data-effect="sing-right">Users in Company: {{ clientsCompany }}</div>
+        <div hover-popover data-toggle="tooltip" data-animation="animated wobble">Users in Company: {{ clientsCompany }}</div>
       </div>
 
       <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-2 buttons">

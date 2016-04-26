@@ -106,6 +106,21 @@ li.edit div form div.has-error input {
   border-color: red;
 }
 
+div.popover h3 {
+  background-color: bisque;
+  font-size: 22px;
+  margin: 5px;
+  text-align: center;
+}
+
+div.popover div{
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px dotted gray;
+
+}
+
 /** Buttons **/
 li.edit div form div.buttons {
   width: 150px;

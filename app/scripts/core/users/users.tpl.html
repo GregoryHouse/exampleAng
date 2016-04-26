@@ -48,7 +48,7 @@
         {{ user.lastName }}
       </div>
       <div class="col-lg-2">
-        {{ user.birthDay }}
+        {{ user.birthDay | date:'dd.MM.yyyy' }}
       </div>
       <div class="col-lg-1">
         {{ userRole[user.type] }}

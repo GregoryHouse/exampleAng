@@ -12,15 +12,33 @@
 
     function saveUpdateCompany(editCompany, callback) {
 
-      return $http.post('/api/companies', editCompany)
-        .then(function success(resp) {
-          console.log('success', resp.data);
-          if(callback){
-            callback(resp.data)
-          }
-        }, function error() {
-          return console.log('error');
-        })
+      if (!editCompany.name && editCompany.name > 3) {
+        throw 'Name is required'
+      } else {
+
+        var company = {
+          name: editCompany.name,
+          addressCompany: editCompany.addressCompany,
+          companyMail: editCompany.companyMail,
+          yearFoundation: Date.parse(editCompany.yearFoundation),
+          clients: editCompany.clients
+        };
+
+        console.log(company.yearFoundation)
+        if(editCompany.id){
+          company.id = editCompany.id
+        }
+
+        return $http.post('/api/companies', company)
+          .then(function success(resp) {
+            console.log('success', resp.data);
+            if (callback) {
+              callback(resp.data)
+            }
+          }, function error() {
+            return console.log('error');
+          })
+      }
     }
 
     function deleteCompany(removeCompany, callback) {

@@ -20,11 +20,13 @@
           firstName: editUser.firstName,
           lastName: editUser.lastName,
           company: {id: editUser.company.id},
-          birthDay: editUser.birthDay,
+          birthDay: Date.parse(editUser.birthDay),
           type: editUser.type,
-          mail: editUser.mail,
-          id: editUser.id
+          mail: editUser.mail
         };
+        if(editUser.id){
+          user.id = editUser.id
+        }
 
         return $http.post('/api/users', user)
           .then(function success(resp) {

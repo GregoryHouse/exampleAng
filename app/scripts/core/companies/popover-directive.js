@@ -11,23 +11,20 @@
             var compileTemplate = $compile(template)(scope);
 
             $(element).popover({
-              trigger: "manual",
-              placement: 'top',
-              //container: 'body',
-              //effect:'slide',
-              html: true,
-              //animation: 'am-flip-x',
-              template: compileTemplate,
-              title: ' '
-            })
-            .
-            on("mouseenter", function () {
-              var _this = this;
-              $(this).popover("show");
-              $(".popover").on("mouseleave", function () {
-                $(_this).popover('hide');
-              });
-            }).on("mouseleave", function () {
+                trigger: "manual",
+                placement: 'top',
+                animate: true,
+                html: true,
+                template: compileTemplate,
+                title: ' '
+              })
+            .on("mouseenter", function () {
+                var _this = this;
+                $(this).popover("show");
+                $(".popover").on("mouseleave", function () {
+                  $(_this).popover('hide');
+                });
+              }).on("mouseleave", function () {
               var _this = this;
               setTimeout(function () {
                 if (!$(".popover:hover").length) {

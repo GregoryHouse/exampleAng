@@ -36,7 +36,7 @@
 
         UsersSrv.saveUpdateUser($scope.editUser, function (resp) {
 
-          if (resp.company.id) {
+          if ($scope.editUser.id) {
             for (var i = 0; i < $scope.users.length; i++) {
               if ($scope.users[i].id === resp.id) {
                 $scope.users[i] = resp;

@@ -2,7 +2,7 @@
   {
     "firstName": "Jon",
     "lastName": "Malkovich",
-    "birthDay": "24.03.1963",
+    "birthDay": 53989899900,
     "type": "USER",
     "mail": "jon@mail.com",
     "id": "3165"
@@ -10,7 +10,7 @@
   {
     "firstName": "Ivan",
     "lastName": "Ivanov",
-    "birthDay": "27.08.1959",
+    "birthDay": 946578401500,
     "type": "USER",
     "mail": "petrov@mail.com",
     "id": "06241"
@@ -18,7 +18,7 @@
   {
     "firstName": "Petr",
     "lastName": "First",
-    "birthDay": "08.12.1989",
+    "birthDay": 765777777000,
     "type": "ADMIN",
     "mail": "stpiter@mail.com",
     "id": "11868"
